@@ -8,12 +8,16 @@ class HomeScreen extends HookWidget {
   Widget build(BuildContext context) {
     final mode = useProvider(modeProvider);
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () => mode.change(),
+          )
+        ],
+      ),
       body: Center(
         child: Text("HOME"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => mode.change(),
-        child: Icon(Icons.refresh),
       ),
     );
   }
