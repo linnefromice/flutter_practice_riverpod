@@ -29,9 +29,6 @@ class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(usersProvider.state);
-    final provider = useProvider(usersProvider);
-    final _nameController = useTextEditingController();
-    final _ageController = useTextEditingController();
 
     return Scaffold(
       appBar: AppBar(),
@@ -50,56 +47,67 @@ class UserScreen extends HookWidget {
         onPressed: () {
           showDialog(
             context: context,
-            builder: (_) => AlertDialog(
-              title: Text("Add New User"),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(
-                      hintText: 'Name'
-                    ),
-                  ),
-                  TextField(
-                    controller: _ageController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: 'Age'
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                RaisedButton.icon(
-                  color: Colors.red[100],
-                  label: Text("Cancel"),
-                  icon: Icon(Icons.clear, color: Colors.red),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _nameController.clear();
-                    _ageController.clear();
-                  },
-                ),
-                RaisedButton.icon(
-                  color: Colors.green[100],
-                  label: Text("Add"),
-                  icon: Icon(Icons.add, color: Colors.green),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    provider.add(
-                      _nameController.text,
-                      int.parse(_ageController.text),
-                    );
-                    _nameController.clear();
-                    _ageController.clear();
-                  },
-                ),
-              ],
-            ),
+            builder: (_) => _UserFormDialog()
           );
         },
       ),
+    );
+  }
+}
+
+class _UserFormDialog extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    final provider = useProvider(usersProvider);
+    final _nameController = useTextEditingController();
+    final _ageController = useTextEditingController();
+
+    return AlertDialog(
+      title: Text("Add New User"),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _nameController,
+            decoration: InputDecoration(
+                hintText: 'Name'
+            ),
+          ),
+          TextField(
+            controller: _ageController,
+            keyboardType: TextInputType.number,
+            decoration: InputDecoration(
+                hintText: 'Age'
+            ),
+          ),
+        ],
+      ),
+      actions: [
+        RaisedButton.icon(
+          color: Colors.red[100],
+          label: Text("Cancel"),
+          icon: Icon(Icons.clear, color: Colors.red),
+          onPressed: () {
+            Navigator.pop(context);
+            _nameController.clear();
+            _ageController.clear();
+          },
+        ),
+        RaisedButton.icon(
+          color: Colors.green[100],
+          label: Text("Add"),
+          icon: Icon(Icons.add, color: Colors.green),
+          onPressed: () {
+            Navigator.pop(context);
+            provider.add(
+              _nameController.text,
+              int.parse(_ageController.text),
+            );
+            _nameController.clear();
+            _ageController.clear();
+          },
+        ),
+      ],
     );
   }
 }
