@@ -14,12 +14,22 @@ class UsersState extends StateNotifier<List<User>> {
     User(id: 3, name: "Vivi Ornitier", age: 16),
     User(id: 4, name: "Adelbert Steiner", age: 33),
   ]);
+
+  void add(final String name, final int age) {
+    final newId = state.length + 1;
+    state = [...state, User(
+      id: newId,
+      name: name,
+      age: age
+    )];
+  }
 }
 
 class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(usersProvider.state);
+    final provider = useProvider(usersProvider);
     final _nameController = useTextEditingController();
     final _ageController = useTextEditingController();
 
@@ -77,6 +87,10 @@ class UserScreen extends HookWidget {
                   icon: Icon(Icons.add, color: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
+                    provider.add(
+                      _nameController.text,
+                      int.parse(_ageController.text),
+                    );
                     _nameController.clear();
                     _ageController.clear();
                   },
