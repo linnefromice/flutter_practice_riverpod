@@ -1,28 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:linnefromice/models/user.dart';
 
 // ref: http://www.ffotaku.com/final-fantasy-ix/characters.php
-final users = [
-  {
-    "id": 1,
-    "name": "Zidane Tribal",
-    "age": 16,
-  },
-  {
-    "id": 2,
-    "name": "Garnet Til Alexandros XVII",
-    "age": 16,
-  },
-  {
-    "id": 3,
-    "name": "Vivi Ornitier",
-    "age": 9,
-  },
-  {
-    "id": 4,
-    "name": "Adelbert Steiner",
-    "age": 33,
-  },
+final List<User> users = [
+  User(id: 1, name: "Zidane Tribal", age: 16),
+  User(id: 2, name: "Garnet Til Alexandros XVII", age: 9),
+  User(id: 3, name: "Vivi Ornitier", age: 16),
+  User(id: 4, name: "Adelbert Steiner", age: 33),
 ];
 
 class UserScreen extends HookWidget {
@@ -32,11 +17,11 @@ class UserScreen extends HookWidget {
       appBar: AppBar(),
       body: Column(
         children: List.generate(users.length, (index) {
-          final user = users[index];
+          final User user = users[index];
           return ListTile(
-            leading: Text(user["id"].toString()),
-            title: Text(user["name"]),
-            subtitle: Text(user["age"].toString()),
+            leading: Text(user.id.toString()),
+            title: Text(user.name),
+            subtitle: Text(user.age.toString()),
           );
         }),
       )
