@@ -17,11 +17,11 @@ class UserScreen extends HookWidget {
       appBar: AppBar(),
       body: Column(
         children: List.generate(users.length, (index) {
-          final User user = users[index];
+          final user = users[index].toJson();
           return ListTile(
-            leading: Text(user.id.toString()),
-            title: Text(user.name),
-            subtitle: Text(user.age.toString()),
+            leading: Text(user["id"].toString()),
+            title: Text(user["name"]),
+            subtitle: Text(user["age"].toString()),
           );
         }),
       )
