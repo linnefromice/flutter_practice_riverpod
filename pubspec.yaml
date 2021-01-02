@@ -34,10 +34,15 @@ dependencies:
   # riverpod for hook
   flutter_hooks: ^0.14.0
   hooks_riverpod: ^0.12.1
+  # for freezed
+  freezed_annotation:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  # for freezed
+  build_runner:
+  freezed:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
