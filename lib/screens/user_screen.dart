@@ -32,7 +32,43 @@ class UserScreen extends HookWidget {
             subtitle: Text(user["age"].toString()),
           );
         }),
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: Text("Add New User"),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Name: Eiko Carol"),
+                  Text("Age: 6"),
+                ],
+              ),
+              actions: [
+                RaisedButton.icon(
+                  color: Colors.red[100],
+                  label: Text("Cancel"),
+                  icon: Icon(Icons.clear, color: Colors.red),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                RaisedButton.icon(
+                  color: Colors.green[100],
+                  label: Text("Add"),
+                  icon: Icon(Icons.add, color: Colors.green),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }
