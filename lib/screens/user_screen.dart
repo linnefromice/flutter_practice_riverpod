@@ -1,12 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class UserScreen extends StatelessWidget {
+// ref: http://www.ffotaku.com/final-fantasy-ix/characters.php
+final users = [
+  {
+    "id": 1,
+    "name": "Zidane Tribal",
+    "age": 16,
+  },
+  {
+    "id": 2,
+    "name": "Garnet Til Alexandros XVII",
+    "age": 16,
+  },
+  {
+    "id": 3,
+    "name": "Vivi Ornitier",
+    "age": 9,
+  },
+];
+
+class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text("UserScreen"),
-      ),
+      appBar: AppBar(),
+      body: Column(
+        children: List.generate(users.length, (index) {
+          final user = users[index];
+          return ListTile(
+            leading: Text(user["id"].toString()),
+            title: Text(user["name"]),
+            subtitle: Text(user["age"].toString()),
+          );
+        }),
+      )
     );
   }
 }
