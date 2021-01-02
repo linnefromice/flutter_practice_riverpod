@@ -36,6 +36,7 @@ dependencies:
   hooks_riverpod: ^0.12.1
   # for freezed
   freezed_annotation:
+  json_serializable:
 
 dev_dependencies:
   flutter_test:
