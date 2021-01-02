@@ -31,16 +31,12 @@ class CounterScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                counterState.increment();
-              },
+              onPressed: () => counterState.increment(),
               icon: Icon(Icons.add),
               label: Text("Plus One"),
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                counterState.decrement();
-              },
+              onPressed: () => counterState.decrement(),
               icon: Icon(Icons.remove),
               label: Text("Minus One"),
             )
