@@ -20,6 +20,8 @@ class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(usersProvider.state);
+    final _nameController = useTextEditingController();
+    final _ageController = useTextEditingController();
 
     return Scaffold(
       appBar: AppBar(),
@@ -43,8 +45,19 @@ class UserScreen extends HookWidget {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Name: Eiko Carol"),
-                  Text("Age: 6"),
+                  TextField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      hintText: 'Name'
+                    ),
+                  ),
+                  TextField(
+                    controller: _ageController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Age'
+                    ),
+                  ),
                 ],
               ),
               actions: [
@@ -54,6 +67,8 @@ class UserScreen extends HookWidget {
                   icon: Icon(Icons.clear, color: Colors.red),
                   onPressed: () {
                     Navigator.pop(context);
+                    _nameController.clear();
+                    _ageController.clear();
                   },
                 ),
                 RaisedButton.icon(
@@ -62,6 +77,8 @@ class UserScreen extends HookWidget {
                   icon: Icon(Icons.add, color: Colors.green),
                   onPressed: () {
                     Navigator.pop(context);
+                    _nameController.clear();
+                    _ageController.clear();
                   },
                 ),
               ],
