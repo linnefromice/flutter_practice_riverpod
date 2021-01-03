@@ -26,6 +26,7 @@ class UsersState extends StateNotifier<List<User>> {
 
   void delete(final int id) {
     state.removeWhere((element) => element.id == id);
+    state = state; // TEMP
   }
 }
 
@@ -33,6 +34,7 @@ class UserScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useProvider(usersProvider.state);
+    final provider = useProvider(usersProvider);
 
     return Scaffold(
       appBar: AppBar(),
@@ -57,7 +59,9 @@ class UserScreen extends HookWidget {
                     ),
                     TextButton(
                       child: Text("DELETE"),
-                      onPressed: () {},
+                      onPressed: () {
+                        provider.delete(user["id"]);
+                      },
                     ),
                   ],
                 )
