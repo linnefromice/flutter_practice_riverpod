@@ -35,10 +35,30 @@ class UserScreen extends HookWidget {
       body: Column(
         children: List.generate(state.length, (index) {
           final user = state[index].toJson();
-          return ListTile(
-            leading: Text(user["id"].toString()),
-            title: Text(user["name"]),
-            subtitle: Text(user["age"].toString()),
+          return Card(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: Text(user["id"].toString()),
+                  title: Text(user["name"]),
+                  subtitle: Text(user["age"].toString()),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      child: Text("MODIFY"),
+                      onPressed: () {},
+                    ),
+                    TextButton(
+                      child: Text("DELETE"),
+                      onPressed: () {},
+                    ),
+                  ],
+                )
+              ],
+            )
           );
         }),
       ),
