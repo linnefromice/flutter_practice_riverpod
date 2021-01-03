@@ -16,12 +16,16 @@ class UsersState extends StateNotifier<List<User>> {
   ]);
 
   void add(final String name, final int age) {
-    final newId = state.length + 1;
+    final newId = state.last.id + 1;
     state = [...state, User(
       id: newId,
       name: name,
       age: age
     )];
+  }
+
+  void delete(final int id) {
+    state.removeWhere((element) => element.id == id);
   }
 }
 
