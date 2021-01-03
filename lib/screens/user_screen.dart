@@ -70,10 +70,10 @@ class UserScreen extends HookWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
-        children: List.generate(state.length, (index) {
-          final user = state[index];
-          return _buildListTile(user, provider);
-        }),
+        children: List.generate(
+          state.length,
+          (index) => _buildListTile(state[index], provider)
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
