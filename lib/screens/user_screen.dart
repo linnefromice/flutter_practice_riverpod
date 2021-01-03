@@ -56,6 +56,24 @@ class UserScreen extends HookWidget {
 }
 
 class _UserFormDialog extends HookWidget {
+  Widget _buildAddButton({final Function onPressed}) {
+    return RaisedButton.icon(
+      color: Colors.green[100],
+      label: Text("Add"),
+      icon: Icon(Icons.add, color: Colors.green),
+      onPressed: onPressed
+    );
+  }
+
+  Widget _buildCancelButton({final Function onPressed}) {
+    return RaisedButton.icon(
+      color: Colors.red[100],
+      label: Text("Cancel"),
+      icon: Icon(Icons.clear, color: Colors.red),
+      onPressed: onPressed
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final provider = useProvider(usersProvider);
@@ -83,20 +101,14 @@ class _UserFormDialog extends HookWidget {
         ],
       ),
       actions: [
-        RaisedButton.icon(
-          color: Colors.red[100],
-          label: Text("Cancel"),
-          icon: Icon(Icons.clear, color: Colors.red),
+        _buildCancelButton(
           onPressed: () {
             Navigator.pop(context);
             _nameController.clear();
             _ageController.clear();
-          },
+          }
         ),
-        RaisedButton.icon(
-          color: Colors.green[100],
-          label: Text("Add"),
-          icon: Icon(Icons.add, color: Colors.green),
+        _buildAddButton(
           onPressed: () {
             Navigator.pop(context);
             provider.add(
@@ -105,8 +117,8 @@ class _UserFormDialog extends HookWidget {
             );
             _nameController.clear();
             _ageController.clear();
-          },
-        ),
+          }
+        )
       ],
     );
   }
