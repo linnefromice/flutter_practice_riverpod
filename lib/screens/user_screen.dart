@@ -31,6 +31,37 @@ class UsersState extends StateNotifier<List<User>> {
 }
 
 class UserScreen extends HookWidget {
+  Widget _buildListTile(final User user, final UsersState provider) {
+    final userJson = user.toJson();
+    return Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Text(userJson["id"].toString()),
+              title: Text(userJson["name"]),
+              subtitle: Text(userJson["age"].toString()),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: Text("MODIFY"),
+                  onPressed: () {}, // TODO
+                ),
+                TextButton(
+                  child: Text("DELETE"),
+                  onPressed: () {
+                    provider.delete(userJson["id"]);
+                  },
+                ),
+              ],
+            )
+          ],
+        )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = useProvider(usersProvider.state);
@@ -40,34 +71,8 @@ class UserScreen extends HookWidget {
       appBar: AppBar(),
       body: Column(
         children: List.generate(state.length, (index) {
-          final user = state[index].toJson();
-          return Card(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ListTile(
-                  leading: Text(user["id"].toString()),
-                  title: Text(user["name"]),
-                  subtitle: Text(user["age"].toString()),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      child: Text("MODIFY"),
-                      onPressed: () {},
-                    ),
-                    TextButton(
-                      child: Text("DELETE"),
-                      onPressed: () {
-                        provider.delete(user["id"]);
-                      },
-                    ),
-                  ],
-                )
-              ],
-            )
-          );
+          final user = state[index];
+          return _buildListTile(user, provider);
         }),
       ),
       floatingActionButton: FloatingActionButton(
